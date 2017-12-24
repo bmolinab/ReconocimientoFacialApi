@@ -45,22 +45,16 @@ namespace ReconocimientoFacialApi.Controllers
                 };
 
             };
-
-
-
             IEnumerable<FaceAttributeType> faceAttributes =
             new FaceAttributeType[] { FaceAttributeType.Gender,
                 FaceAttributeType.Age, FaceAttributeType.Smile,
                 FaceAttributeType.Emotion, FaceAttributeType.Glasses,
                 FaceAttributeType.Hair };
-
             // Call the Face API.
-
             using (Stream imageFileStream = new MemoryStream(value.Array))
             {
                 faces = await faceServiceClient.DetectAsync(imageFileStream, returnFaceId: true, returnFaceLandmarks: false, returnFaceAttributes: faceAttributes);
             }
-
             return new Respuesta
             {
                 mensaje = faces[0].FaceAttributes.Age.ToString(),
